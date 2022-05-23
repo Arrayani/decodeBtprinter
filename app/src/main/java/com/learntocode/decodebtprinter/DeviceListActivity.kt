@@ -17,6 +17,7 @@ import java.lang.Exception
 
 
 class DeviceListActivity : Activity() {
+    //TODO 3
     lateinit var mBluetoothAdapter: BluetoothAdapter
     private var mPairedDevicesArrayAdapter: ArrayAdapter<String>? = null
     override fun onCreate(mSavedInstanceState: Bundle?) {

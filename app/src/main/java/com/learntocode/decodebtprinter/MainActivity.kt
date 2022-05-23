@@ -79,12 +79,12 @@ class MainActivity : Activity(), Runnable {
         //cekAdminBTPermission()
         cekScanBTPermission()
 
-
+//Todo 1
         mScan.setOnClickListener {
             if ((mScan.text == "Connect")) {
                 mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
                 if (mBluetoothAdapter == null) {
-                    Toast.makeText(this@MainActivity, "Message1", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Device doestn support bluetooth", Toast.LENGTH_SHORT).show()
                 } else {
                     if (!mBluetoothAdapter!!.isEnabled) {
                         val enableBtIntent = Intent(
@@ -95,9 +95,11 @@ class MainActivity : Activity(), Runnable {
                             REQUEST_ENABLE_BT
                         )
                     } else {
+                        //TODO 2
                         ListPairedDevices()
                         val connectIntent = Intent(
                             this@MainActivity,
+                            //TODO 3
                             DeviceListActivity::class.java
                         )
                         startActivityForResult(
@@ -119,16 +121,21 @@ class MainActivity : Activity(), Runnable {
             }
         }
         mPrint = findViewById(R.id.mPrint)
-        mPrint.setOnClickListener(View.OnClickListener {
+        // TODO 4
+
+        mPrint.setOnClickListener {
+            //TODO 5
             p1()
 
             /* 5000 ms (5 Seconds) */
             val TIME = 10000
             Handler().postDelayed({ /* print second copy */
+
+                //TODO 6
                 p2()
                 printstat = 1
-            }, TIME.toLong())
-        })
+            }, TIME.toLong()) // cara lain memasukan angka untuk delaymilis
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -287,6 +294,7 @@ class MainActivity : Activity(), Runnable {
     }
     //outside main
 // ini fungsi untuk menangkap input dari user
+    //TODO 5
     fun p1() {
         val t: Thread = object : Thread() {
             override fun run() {
@@ -311,19 +319,19 @@ class MainActivity : Activity(), Runnable {
                     he = "      EFULLTECH NIGERIA\n"
                     he = "$he********************************\n\n"
                     header = "FULL NAME:\n"
-                    BILL = fullName!!.text.toString() + "\n"
+                    BILL = fullName!!.text.toString() + "\n"   // ini buat ngambil text nama
                     BILL = (BILL
                             + "================================\n")
                     header2 = "COMPANY'S NAME:\n"
-                    vio = companyName!!.text.toString() + "\n"
+                    vio = companyName!!.text.toString() + "\n"  // ini buat ngambil text nama company
                     vio = (vio
                             + "================================\n")
                     header3 = "AGE:\n"
-                    mvdtail = age!!.text.toString() + "\n"
+                    mvdtail = age!!.text.toString() + "\n"   // ini buat ngambil text age
                     mvdtail = (mvdtail
                             + "================================\n")
                     header4 = "AGENT DETAILS:\n"
-                    offname = agent_detail!!.text.toString() + "\n"
+                    offname = agent_detail!!.text.toString() + "\n" // ini buat ngambil text agents detail
                     offname = (offname
                             + "--------------------------------\n")
                     time = formattedDate + "\n\n"
@@ -343,10 +351,11 @@ class MainActivity : Activity(), Runnable {
                     os.write(copy.toByteArray())
 
 
-                    // Setting heigh
+
                     //ini bedanya dengan diatas adalah, variable valuenya sudah di isi dengan angka
                     // sehingga jika menggunakan toByteArray maka yang dibawah ini menggunakan'
                     //intToByteArray
+                    // Setting height --- ini buat semacam feed kertas blank. memberi jeda tulisan kosong untuk print yg ke dua
                     val gs = 29
                     os.write(intToByteArray(gs).toInt())
                     val h = 150
@@ -457,11 +466,9 @@ class MainActivity : Activity(), Runnable {
             Log.e("Tag", "Exe ", e)
         }
     }
-
-    public override fun onActivityResult(
-        mRequestCode: Int, mResultCode: Int,
-        mDataIntent: Intent
-    ) {
+//TODO 7
+    public override fun onActivityResult( mRequestCode: Int, mResultCode: Int, mDataIntent: Intent)
+     {
         super.onActivityResult(mRequestCode, mResultCode, mDataIntent)
         when (mRequestCode) {
             REQUEST_CONNECT_DEVICE -> if (mResultCode == RESULT_OK) {
@@ -496,7 +503,7 @@ class MainActivity : Activity(), Runnable {
             }
         }
     }
-
+//TODO 2
     private fun ListPairedDevices() {
         val mPairedDevices = mBluetoothAdapter?.getBondedDevices()
         if (mPairedDevices != null) {
