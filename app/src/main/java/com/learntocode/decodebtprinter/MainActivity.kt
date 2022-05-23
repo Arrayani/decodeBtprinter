@@ -311,19 +311,19 @@ class MainActivity : Activity(), Runnable {
                     he = "      EFULLTECH NIGERIA\n"
                     he = "$he********************************\n\n"
                     header = "FULL NAME:\n"
-                    BILL = fullName!!.text.toString() + "\n"
+                    BILL = fullName!!.text.toString() + "\n"   // ini buat ngambil text nama
                     BILL = (BILL
                             + "================================\n")
                     header2 = "COMPANY'S NAME:\n"
-                    vio = companyName!!.text.toString() + "\n"
+                    vio = companyName!!.text.toString() + "\n"  // ini buat ngambil text nama company
                     vio = (vio
                             + "================================\n")
                     header3 = "AGE:\n"
-                    mvdtail = age!!.text.toString() + "\n"
+                    mvdtail = age!!.text.toString() + "\n"   // ini buat ngambil text age
                     mvdtail = (mvdtail
                             + "================================\n")
                     header4 = "AGENT DETAILS:\n"
-                    offname = agent_detail!!.text.toString() + "\n"
+                    offname = agent_detail!!.text.toString() + "\n" // ini buat ngambil text agents detail
                     offname = (offname
                             + "--------------------------------\n")
                     time = formattedDate + "\n\n"
@@ -343,10 +343,11 @@ class MainActivity : Activity(), Runnable {
                     os.write(copy.toByteArray())
 
 
-                    // Setting heigh
+
                     //ini bedanya dengan diatas adalah, variable valuenya sudah di isi dengan angka
                     // sehingga jika menggunakan toByteArray maka yang dibawah ini menggunakan'
                     //intToByteArray
+                    // Setting height --- ini buat semacam feed kertas blank. memberi jeda tulisan kosong untuk print yg ke dua
                     val gs = 29
                     os.write(intToByteArray(gs).toInt())
                     val h = 150
