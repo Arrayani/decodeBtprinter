@@ -74,10 +74,12 @@ class MainActivity : Activity(), Runnable {
         agent_detail = findViewById(R.id.et_agent_details)
         mScan = findViewById(R.id.Scan)
         testing()
-        //cekBtPermission()
-        cekForBTConPermision()
-        //cekAdminBTPermission()
         cekScanBTPermission()
+        cekForBTConPermision()
+        //urutannya adalah izin scan dulu, baru connection biar ga error
+        //cekBtPermission()
+        //cekAdminBTPermission()
+
 
 //Todo 1
         mScan.setOnClickListener {
@@ -87,25 +89,13 @@ class MainActivity : Activity(), Runnable {
                     Toast.makeText(this@MainActivity, "Device doestn support bluetooth", Toast.LENGTH_SHORT).show()
                 } else {
                     if (!mBluetoothAdapter!!.isEnabled) {
-                        val enableBtIntent = Intent(
-                            BluetoothAdapter.ACTION_REQUEST_ENABLE
-                        )
-                        startActivityForResult(
-                            enableBtIntent,
-                            REQUEST_ENABLE_BT
-                        )
+                        val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                        startActivityForResult(enableBtIntent,REQUEST_ENABLE_BT)
                     } else {
                         //TODO 2
                         ListPairedDevices()
-                        val connectIntent = Intent(
-                            this@MainActivity,
-                            //TODO 3
-                            DeviceListActivity::class.java
-                        )
-                        startActivityForResult(
-                            connectIntent,
-                            REQUEST_CONNECT_DEVICE
-                        )
+                        val connectIntent = Intent(this@MainActivity,DeviceListActivity::class.java)//TODO 3
+                        startActivityForResult(connectIntent,REQUEST_CONNECT_DEVICE)
                     }
                 }
             } else if ((mScan.text == "Disconnect")) {
@@ -505,14 +495,11 @@ class MainActivity : Activity(), Runnable {
     }
 //TODO 2
     private fun ListPairedDevices() {
-        val mPairedDevices = mBluetoothAdapter?.getBondedDevices()
+        val mPairedDevices = mBluetoothAdapter?.bondedDevices
         if (mPairedDevices != null) {
             if (mPairedDevices.size > 0) {
                 for (mDevice: BluetoothDevice in mPairedDevices) {
-                    Log.v(
-                        TAG, "PairedDevices: " + mDevice.name + "  "
-                                + mDevice.address
-                    )
+                    Log.v(TAG, "PairedDevices: " + mDevice.name + "  "+ mDevice.address)
                 }
             }
         }

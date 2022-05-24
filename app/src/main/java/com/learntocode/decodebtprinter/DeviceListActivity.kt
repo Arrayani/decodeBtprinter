@@ -29,9 +29,10 @@ class DeviceListActivity : Activity() {
         val mPairedListView = findViewById<ListView>(R.id.paired_devices)
         mPairedListView.adapter = mPairedDevicesArrayAdapter
         mPairedListView.onItemClickListener = mDeviceClickListener
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         val mPairedDevices = mBluetoothAdapter.bondedDevices
+
         if (mPairedDevices.size > 0) {
             /* List of all paired devices */
             findViewById<View>(R.id.title_paired_devices).visibility = View.VISIBLE
